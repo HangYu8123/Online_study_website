@@ -134,7 +134,10 @@ def feedback():
                 session['episode'] = episode
                 session["nextpage"] = "episode"+str(episode)+"step"+str(step)+".html"
                 session['feedbacklist'] =[] # reset for the next episode
-                return render_template("info_buttonpress.html")
+                if episode == 1:
+                    return render_template("info_pouring.html")
+                elif episode == 2:
+                    return render_template("info_spining.html")
             else:
                 feedbacklist.append(feedbacknum) # add the last feedback to the list
                 module_dir = os.path.abspath(os.path.dirname(__file__))
