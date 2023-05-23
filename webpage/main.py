@@ -11,7 +11,7 @@ import os
 
 
 letters = string.ascii_letters
-eps_len_list = [10, 10 , 10]
+eps_len_list = [1, 1 , 1]
 app = Flask(__name__)
 # Setup the secret key and the environment
 app.config.update(SECRET_KEY='osd(99092=36&462134kjKDhuIS_d23',
@@ -141,7 +141,7 @@ def feedback():
             else:
                 feedbacklist.append(feedbacknum) # add the last feedback to the list
                 module_dir = os.path.abspath(os.path.dirname(__file__))
-                file_path = os.path.join(module_dir, "feedback_" + str(sessionID)+ ".csv")
+                file_path = os.path.join(module_dir, "progress_" + str(sessionID)+ ".csv")
                 # write all this episode's feedback to the file
                 # path  = os.getcwd()
                 #with open(path + f"/feedback_data/participant_feed_{sessionID}.csv", 'a', newline='') as csvfile:
@@ -153,7 +153,7 @@ def feedback():
 
                 print("Study complete, going to stopped page")
                 module_dir = os.path.abspath(os.path.dirname(__file__))
-                file_path = os.path.join(module_dir, "feedback_" + str(sessionID)+ ".csv")
+                file_path = os.path.join(module_dir, "progress_" + str(sessionID)+ ".csv")
                 # write all this episode's feedback to the file
                 # path  = os.getcwd()
                 #with open(path + f"/feedback_data/participant_feed_{sessionID}.csv", 'a', newline='') as csvfile:
@@ -165,8 +165,8 @@ def feedback():
                 #     csvwriter = csv.writer(csvfile)
                 #     csvwriter.writerow([episode+1, time.time()])
                 #     csvfile.close()
-                return render_template("thankyou.html",sessionID=session["sessionID"])
-
+                #return render_template("thankyou.html",sessionID=session["sessionID"])
+                return render_template("nasa_tlx.html",sessionID=session["sessionID"])
             print("Going to "+ session["nextpage"])
         else:
             print("not any of those conditions")
@@ -195,6 +195,34 @@ def download_data(feedbacklist):
     return excel.make_response_from_dict(d, file_type=extension_type, file_name=filename)
 
 
+from flask import request
+import csv
+
+@app.route('/submit_survey', methods=['POST'])
+def submit_survey():
+    # Retrieve data from form
+    mental_demand = request.form.get('mental_demand')
+    physical_demand = request.form.get('physical_demand')
+    temporal_demand = request.form.get('temporal_demand')
+    performance = request.form.get('performance')
+    effort = request.form.get('effort')
+    frustration = request.form.get('frustration')
+
+    # Use the session ID to match with the correct file
+    sessionID = session.get('session_id', None)
+    if sessionID:
+        module_dir = os.path.abspath(os.path.dirname(__file__))
+        file_path = os.path.join(module_dir, "progress_" + str(sessionID)+ ".csv")
+
+        with open(file_path, 'a', newline='') as csvfile:
+            writer = csv.writer(f)
+            writer.writerow(['NASA TLX Survey', 'Mental Demand', mental_demand,
+                             'Physical Demand', physical_demand, 'Temporal Demand',
+                             temporal_demand, 'Performance', performance, 'Effort',
+                             effort, 'Frustration', frustration])
+    
+    # After writing, you can redirect user to another page or show a success message
+    return render_template("thankyou.html",sessionID=session["sessionID"])
 
 
 

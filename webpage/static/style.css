@@ -88,3 +88,54 @@ input[type="submit"]:hover {
 .score-range {
   display: inline-block;
 }
+
+
+.tlx-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.tlx-container h1 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+input[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+
+.tlx-question {
+  margin-bottom: 20px;
+}
+
+input[type="range"] {
+  width: 80%;
+}
+
+.range-value {
+  padding-left: 10px;
+}
+
+.tlx-question label {
+  font-size: 20px;  /* Adjust this value as you see fit */
+}
