@@ -13,7 +13,9 @@
 </style>
 <div class="main">
   <div>
-    <h1>Task Description</h1>
+    <h1>
+      <span style="color:green;"> Spining Task  </span>
+      </h1>
     <!-- <h2>Tufts University - Task Description and Controls</h2>
       <h3>Virtual Agents learning from human interaction</h3> -->
     <!-- <p>
@@ -21,7 +23,10 @@ Below is a description of the task you will be asked to complete for this study:
 </p> -->
 <p>
 <h4>What is the task?</h4>
-The goal of the robot is to spin the jelly ball in the cup. </p>
+The goal of the robot is to 
+<span style="color:red;">spin the jelly ball </span>
+
+in the cup. </p>
 
 
 <p>
@@ -34,13 +39,13 @@ The goal of the robot is to spin the jelly ball in the cup. </p>
   
   <h4>How to rate the robot?</h4>
   You will be rating the robot's performance based on the task completion on a scale of 0 to 100, 
-  where 0 means the robot has not started the task, and 100 means the robot has completed the task perfectly.
+  where <span style="color:blue;"> 0 means the robot has not started the task </span>, and <span style="color: blue;"> 100 means the robot has completed the task perfectly</span> .
 </p>
 
 
 <h1>A demo of human performing the task</h1>
 <div class="Shared-Video-player">
-<video id="Shared-Video" width="640" height="480" controls autoplay ><source src={{ url_for('static', filename="spining.mp4") }} type="video/mp4"></video>
+<video id="Shared-Video" width="640" height="480" controls autoplay ><source src={{ url_for('static', filename="human_spining.mp4") }} type="video/mp4"></video>
 </div>
  <div>
   <form action="/training" method="post">

@@ -11,7 +11,7 @@ import os
 
 
 letters = string.ascii_letters
-eps_len_list = [1, 1 , 1]
+eps_len_list = [10, 10 , 10]
 app = Flask(__name__)
 # Setup the secret key and the environment
 app.config.update(SECRET_KEY='osd(99092=36&462134kjKDhuIS_d23',
@@ -135,9 +135,9 @@ def feedback():
                 session["nextpage"] = "episode"+str(episode)+"step"+str(step)+".html"
                 session['feedbacklist'] =[] # reset for the next episode
                 if episode == 1:
-                    return render_template("info_pouring.html")
+                    return render_template("info_pouring.html", feedback=feedbacknum)
                 elif episode == 2:
-                    return render_template("info_spining.html")
+                    return render_template("info_spining.html", feedback=feedbacknum)
             else:
                 feedbacklist.append(feedbacknum) # add the last feedback to the list
                 module_dir = os.path.abspath(os.path.dirname(__file__))

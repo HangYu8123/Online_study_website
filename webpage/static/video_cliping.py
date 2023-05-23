@@ -2,8 +2,8 @@ from moviepy.editor import VideoFileClip, concatenate_videoclips
 from moviepy.video import fx
 
 # Load video
-clip = VideoFileClip('/home/jstaley/Desktop/online_study/webpage/static/moving.mp4')
-
+clip = VideoFileClip(r'C:\Users\Hang Yu\Desktop\online_study\Online_study_website\webpage\static\spining.avi')
+clip = clip.subclip(30, 500)
 # Determine clip duration and the duration of each segment
 total_duration = clip.duration
 segment_duration = total_duration / 10
@@ -18,9 +18,9 @@ for i in range(10):
     cut_clip = clip.subclip(start_time, end_time)
     
     # Speed up the clip
-    speed_up_factor = 2  # 2x speed
+    speed_up_factor = 4  # 2x speed
     fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
-    fast_clip.write_videofile("/home/jstaley/Desktop/online_study/webpage/static/episode" + str(1)+"step"+str(i)+".mp4")
+    fast_clip.write_videofile(r"C:\Users\Hang Yu\Desktop\online_study\Online_study_website\webpage\static\episode" + str(2)+"step"+str(i)+".mp4")
 
 
 
