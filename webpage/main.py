@@ -25,7 +25,7 @@ def index():
         session['feedbacklist'] = [] # set up for appending feedback for each episode
         session['episodelength'] = 19 # 0 indexed
         session['episodemax'] = len(eps_len_list) - 1 # 0 indexed
-        session["step"] = 0 # initialize
+        session["step"] = 1 # initialize
         return render_template('gdpr_age.html')
 
 @app.route("/qualified", methods=["POST"])
@@ -128,8 +128,8 @@ def feedback():
                     csvwriter.writerow(feedbacklist)
                     csvfile.close()
                 print("Episode Complete, going to next episode")
-                session["step"] = 0
-                step = 0
+                session["step"] = 1
+                step = 1
                 episode = episode + 1
                 session['episode'] = episode
                 session["nextpage"] = "episode"+str(episode)+"step"+str(step)+".html"
@@ -141,7 +141,7 @@ def feedback():
             else:
                 feedbacklist.append(feedbacknum) # add the last feedback to the list
                 module_dir = os.path.abspath(os.path.dirname(__file__))
-                file_path = os.path.join(module_dir, "progress_" + str(sessionID)+ ".csv")
+                file_path = os.path.join(module_dir, "webpage/feedback data/progress_" + str(sessionID)+ ".csv")
                 # write all this episode's feedback to the file
                 # path  = os.getcwd()
                 #with open(path + f"/feedback_data/participant_feed_{sessionID}.csv", 'a', newline='') as csvfile:
@@ -153,7 +153,7 @@ def feedback():
 
                 print("Study complete, going to stopped page")
                 module_dir = os.path.abspath(os.path.dirname(__file__))
-                file_path = os.path.join(module_dir, "progress_" + str(sessionID)+ ".csv")
+                file_path = os.path.join(module_dir, "webpage/feedback data/progress_" + str(sessionID)+ ".csv")
                 # write all this episode's feedback to the file
                 # path  = os.getcwd()
                 #with open(path + f"/feedback_data/participant_feed_{sessionID}.csv", 'a', newline='') as csvfile:
@@ -212,7 +212,7 @@ def submit_survey():
     sessionID = session['sessionID']
     if sessionID:
         module_dir = os.path.abspath(os.path.dirname(__file__))
-        file_path = os.path.join(module_dir, "progress_" + str(sessionID)+ ".csv")
+        file_path = os.path.join(module_dir, "webpage/feedback data/progress_" + str(sessionID)+ ".csv")
 
         with open(file_path, 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
