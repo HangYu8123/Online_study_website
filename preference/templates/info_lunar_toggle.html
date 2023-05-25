@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='video_format.css') }}"/>
+<style>
+  div.main{
+    max-width: 600px;
+    margin: 20px auto;
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 5px 30px 20px 30px;
+  }
+  div.error{
+    color: red;
+  }
+</style>
+<div class="main">
+  <div>
+    <h1>Task Description</h1>
+    <h2>Tufts University - Task Description and Controls</h2>
+      <h3>Virtual Agents learning from human interaction</h3>
+    <p>
+Below is a description of the task you will be asked to complete for this study:
+</p>
+<p>
+<h4>What is the task?</h4>
+PendulumBot is learning to balance. Your job is to give the robot feedback on how it’s doing, using the buttons at the bottom of the screen.
+If the PendulumBot falls or has balanced for 60 seconds, it will reset to its start position and try again. 
+Feedback can be provided either “good” or “bad” feedback using the buttons on the bottom of the screen. 
+ “Good” feedback should be provided when PendulumBot is balancing near its vertical center. “Bad” feedback should be provided when the pendulum moves
+ further from the vertical center and closer to falling on its side.
+ </p>
+
+
+                  <div class="Shared-Video" style="padding-bottom:100.0%">
+                            <div class="Shared-Video-container Shared-Video-container--shadow-large">
+                              <div class="Shared-Video-caption" style="display: block;">Lunar Lander Demo</div>
+                              <div class="Shared-Video-player">
+                  <video id="Shared-Video" loop="loop"controls autoplay ><source src={{ url_for('static', filename="pendulum_demo.mp4") }} type="video/mp4"></video>
+
+                              </div>
+                            </div>
+
+                       </div>
+    <p>
+<h4>What are the teaching controls?</h4>
+You can teach PendulumBot via the “good” and “bad” feedback buttons. Use the mouse to click on the button you would like to select. When a button is selected, it will have a darker color and glow. 
+When “good” feedback is provided, PendulumBot will become more likely to repeat its actions. When "bad" feedback is provided, PendulumBot will try not to repeat the same behavior.
+ The more you press either button the more feedback PendulumBot will recieve.
+   Feel free to provide as much feedback as you like.
+    </p>
+    
+    <p>
+<h4>Succesfuly completing the task.</h4>
+The goal of the task is to teach PendulumBot to balance and prevent it from falling. You can teach the PendelumBot by providing "good" and "bad" feedback. If you successfully teach the PendulumBot, PendulumBot will not 
+fall over and will continue to balance. If this is the case, please either continue providing feedback or patiently wait for the remaining duration of the study. 
+    </p>
+    
+    <p>
+    
+
+<h4>Duration</h4>
+The interaction will last for approximately 15 minutes (at most 16 minutes).
+ After 15 minutes the pendulum window will close and you will be prompted to complete the study.
+    </p>
+
+<form action="/info" method="post">
+  <input type="checkbox" id="info" name="info" value="info">
+  <label for="info">I have read the above and will act in good faith to complete the objectives described above.</label><br><br>
+  <input type="submit" value="Submit"></input>
+</form>
+<!-- {%if missing_data%}
+<div class="error">
+  Please confirm your consent and sign before submitting.
+</div>
+{% endif %} -->
+
+
+<!-- Required content -->
+<br>
+The Tufts computer science department is committed to making its digital environment accessible to all users, and welcomes comments or suggestions on access improvements.  Please send comments or suggestions on accessibility to the aabl_participants@cs.tufts.edu.
+<br>
+<a href="https://oeo.tufts.edu/policies-procedures/non-discrimination-statement/">Tufts non-discrimination statement</a><br>
+<a href="https://www.tufts.edu/about/privacy">Tufts privacy and terms of use statements</a>
+
+
+
+</div>
