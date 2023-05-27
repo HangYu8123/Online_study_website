@@ -13,7 +13,7 @@
       <div class="subtitle">Session ID: {{ sessionID }}P</div>
       <div class="experiment">
         <div class="video-container">
-          <video width="640" height="480" controls autoplay>
+          <video id="video" width="640" height="480" controls autoplay>
             <!--<source src="static/robotvideo1.mp4" type="video/mp4"> -->
             <source src="static/{{thisvideo}}">
             Your browser does not support the video tag.
@@ -25,17 +25,25 @@
               <span class="score-range">0 totally unfinished</span>
               <br>
               <label for="score">Progress (0-100):</label>
-              <input type="number" id="score" name="score" min="0" max="100" required>
+              <input type="number" id="score" name="score" min="0" max="100" required disabled>
               <span class="score-range">100 task is perfectly done</span>
             </div>
-            <input type="submit" value="Submit Score">
+            <input type="submit" value="Submit Score" disabled>
           </form>
         </div>
       </div>
-      <!-- <div class="bottom-text">
-        <p class="instructions">Watch the video clip (you may need to click the play button) showing one step of the robot's motion towards the button.</p>
-        <p class="instructions">When the video clip is complete, rate from 0-10 how well the robot arm moved towards the button.</p>
-      </div> -->
     </div>
+
+    <script>
+      const video = document.getElementById('video');
+      const scoreInput = document.getElementById('score');
+      const submitButton = document.querySelector('input[type="submit"]');
+
+      video.addEventListener('ended', function() {
+        scoreInput.removeAttribute('disabled');
+        submitButton.removeAttribute('disabled');
+      });
+    </script>
+
   </body>
 </html>
