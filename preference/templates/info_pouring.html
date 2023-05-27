@@ -14,7 +14,7 @@
 <div class="main">
   <div>
     <h1>
-      <span style="color:green;"> Task 3: Spin the jelly balls  </span>
+      <span style="color:green;"> Task 2: Pour to the cup  </span>
       </h1>
     <!-- <h2>Tufts University - Task Description and Controls</h2>
       <h3>Virtual Agents learning from human interaction</h3> -->
@@ -23,9 +23,11 @@ Below is a description of the task you will be asked to complete for this study:
 </p> -->
 <p>
 <h4>What is the task?</h4>
-The goal of the robot is to 
-<span style="color:red;">spin the jelly ball </span>
-in the cup. </p>
+The goal of the robot is to
+<span style="color:red;"> move the cup  </span>
+to a desired location (another cup), and 
+<span style="color:red;">pour the jelly ball </span>
+in the cup to another cup.</p>
 
 
 <p>
@@ -41,10 +43,9 @@ in the cup. </p>
 </p>
 
 
-
 <h1>A demo of human performing the task</h1>
 <div class="Shared-Video-player">
-<video id="Shared-Video" width="640" height="480" controls autoplay ><source src={{ url_for('static', filename="human_spining.mp4") }} type="video/mp4"></video>
+<video id="Shared-Video" width="640" height="480" controls autoplay ><source src={{ url_for('static', filename="human_pouring.mp4") }} type="video/mp4"></video>
 </div>
  <div>
   <form action="/training" method="post">
@@ -57,8 +58,8 @@ in the cup. </p>
   </form>
   <p>Try out the input box here. Each time you enter progress on this page, the page will reload.
     During the experiment,
-    the progress will not display: the next step of robot motion to rate will play instead.</p>
-    <h2>Last progress Entered: {{progress}}</h2>
+    the evaluation will not display: the next step of robot motion to rate will play instead.</p>
+    <h2>Last evaluation Entered: {{progress}}</h2>
 </div>
 
     </p>
@@ -67,7 +68,7 @@ in the cup. </p>
 
     <p>
 <h4>Duration</h4>
-This task will last for approximately 4 minutes, and consists several short videos in total.
+The interaction will last for approximately 4 minutes, and consists 30 short videos in total.
  After all the steps of the final episode, the feedback window will close and you will be prompted to complete the study.
     </p>
 

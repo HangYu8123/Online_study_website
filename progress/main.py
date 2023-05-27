@@ -11,7 +11,7 @@ import os
 
 
 letters = string.ascii_letters
-eps_len_list = [10, 10 , 10]
+eps_len_list = [1, 1 , 1]
 app = Flask(__name__)
 # Setup the secret key and the environment
 app.config.update(SECRET_KEY='osd(99092=36&462134kjKDhuIS_d23',
