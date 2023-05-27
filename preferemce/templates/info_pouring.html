@@ -14,7 +14,7 @@
 <div class="main">
   <div>
     <h1>
-      <span style="color:green;"> Task 2: Pour the jelly balls  </span>
+      <span style="color:green;"> Task 2: Pour to the cup  </span>
       </h1>
     <!-- <h2>Tufts University - Task Description and Controls</h2>
       <h3>Virtual Agents learning from human interaction</h3> -->
@@ -25,7 +25,6 @@ Below is a description of the task you will be asked to complete for this study:
 <h4>What is the task?</h4>
 The goal of the robot is to
 <span style="color:red;"> move the cup  </span>
-
 to a desired location (another cup), and 
 <span style="color:red;">pour the jelly ball </span>
 in the cup to another cup.</p>
@@ -36,13 +35,13 @@ in the cup to another cup.</p>
   <h4>What is your task?</h4>
   <!-- You will be teaching the robot by rating the performance of a robot as it attempts to press a button. 
   For a well-trained robot, it should be able to press the button quickly and reliably. -->
-  You will watch several short videos of a robot performing the task and indicate
-  the completion rate of the task.
+  You will watch several short videos of a robot performing the task and rate the robot's performance.
   
   <h4>How to rate the robot?</h4>
-  You will be rating the robot's performance based on the task completion on a scale of 0 to 100, 
-  where <span style="color:blue;"> 0 means the robot has not started the task </span>, and <span style="color: blue;"> 100 means the robot has completed the task perfectly</span> .
+  You will be rating the robot's performance based on the robot's performance on a scale of 0 to 100, 
+  where <span style="color:blue;"> 0 means the robot's behaviors are totally wrong </span>, and <span style="color: blue;"> 100 means the robot's behaviors are perfect</span> .
 </p>
+
 
 <h1>A demo of human performing the task</h1>
 <div class="Shared-Video-player">
@@ -50,11 +49,11 @@ in the cup to another cup.</p>
 </div>
  <div>
   <form action="/training" method="post">
-    0 totally unfinished
-    <label for="score">Progress (0-100):</label>
+    0 totally wrong
+    <label for="score">Evaluation (0-100):</label>
     <input type="number" id="score" name="score" min="0" max="100" required>
     <input type="submit" value="Submit Score">
-    100 task is perfectly done
+    100 is perfect
   </form>
   </form>
   <p>Try out the input box here. Each time you enter progress on this page, the page will reload.
@@ -69,7 +68,7 @@ in the cup to another cup.</p>
 
     <p>
 <h4>Duration</h4>
-This task will last for approximately 4 minutes, and consists several short videos in total.
+The interaction will last for approximately 4 minutes, and consists 30 short videos in total.
  After all the steps of the final episode, the feedback window will close and you will be prompted to complete the study.
     </p>
 
