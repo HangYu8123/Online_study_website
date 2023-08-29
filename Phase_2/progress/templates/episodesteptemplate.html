@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Robot Video Player | Episode {{episode}} Step {{step}}</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href= "{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">Episode {{episode}} Step {{step}}</div>
+      <div class="subtitle">Session ID: {{ sessionID }}P</div>
+      <div class="experiment">
+        <div class="video-container">
+          <video id="video" width="640" height="480" controls autoplay>
+            <!--<source src="static/robotvideo1.mp4" type="video/mp4"> -->
+            <source src="static/{{thisvideo}}">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="form-container">
+          <form action="/feedback" method="post">
+            <div class="form-group">
+              <span class="score-range">0 totally unfinished</span>
+              <br>
+              <label for="score">progress (0-100):</label>
+              <input type="number" id="score" name="score" min="0" max="100" required disabled>
+              <span class="score-range">100 task is perfectly done</span>
+            </div>
+            <input type="submit" value="Submit Score" disabled>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const video = document.getElementById('video');
+      const scoreInput = document.getElementById('score');
+      const submitButton = document.querySelector('input[type="submit"]');
+
+      video.addEventListener('ended', function() {
+        scoreInput.removeAttribute('disabled');
+        submitButton.removeAttribute('disabled');
+      });
+    </script>
+
+  </body>
+</html>

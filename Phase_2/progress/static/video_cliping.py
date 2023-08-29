@@ -1,0 +1,68 @@
+from moviepy.editor import VideoFileClip, concatenate_videoclips
+from moviepy.video import fx
+
+# Load video
+clip = VideoFileClip("webpage/static/marked_moving.avi")
+clip = clip.subclip(50, 295)
+# Determine clip duration and the duration of each segment
+total_duration = clip.duration
+segment_duration = total_duration / 10
+
+clips = []
+
+for i in range(10):
+    start_time = i * segment_duration
+    end_time = (i + 1) * segment_duration
+    
+    # Cut video into a clip
+    cut_clip = clip.subclip(start_time, end_time)
+    
+    # Speed up the clip
+    speed_up_factor = 2  # 2x speed
+    fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
+    fast_clip.write_videofile("webpage/static/episode" + str(0)+"step"+str(i)+".mp4")
+
+# Load video
+clip = VideoFileClip("webpage/static/marked_pouring.avi")
+clip = clip.subclip(40, 640)
+# Determine clip duration and the duration of each segment
+total_duration = clip.duration
+segment_duration = total_duration / 10
+
+clips = []
+
+for i in range(10):
+    start_time = i * segment_duration
+    end_time = (i + 1) * segment_duration
+    
+    # Cut video into a clip
+    cut_clip = clip.subclip(start_time, end_time)
+    
+    # Speed up the clip
+    speed_up_factor = 5  # 2x speed
+    fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
+    fast_clip.write_videofile("webpage/static/episode" + str(1)+"step"+str(i)+".mp4")
+
+# Load video
+clip = VideoFileClip("webpage/static/marked_spining.avi")
+clip = clip.subclip(30, 750)
+# Determine clip duration and the duration of each segment
+total_duration = clip.duration
+segment_duration = total_duration / 10
+
+clips = []
+
+for i in range(10):
+    start_time = i * segment_duration
+    end_time = (i + 1) * segment_duration
+    
+    # Cut video into a clip
+    cut_clip = clip.subclip(start_time, end_time)
+    
+    # Speed up the clip
+    speed_up_factor = 6  # 2x speed
+    fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
+    fast_clip.write_videofile("webpage/static/episode" + str(2)+"step"+str(i)+".mp4")
+
+
+
