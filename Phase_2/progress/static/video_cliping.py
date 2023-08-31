@@ -2,15 +2,15 @@ from moviepy.editor import VideoFileClip, concatenate_videoclips
 from moviepy.video import fx
 
 # Load video
-clip = VideoFileClip("Phase_2/progress/static/imperfect_demo.avi")
-clip = clip.subclip(5, 920).without_audio()
+clip = VideoFileClip("Phase_2/progress/static/perfect_demo.avi")
+clip = clip.subclip(30, 890).without_audio()
 # Determine clip duration and the duration of each segment
 total_duration = clip.duration
-segment_duration = total_duration / 15
+segment_duration = total_duration / 1
 
 clips = []
 
-for i in range(10):
+for i in range(1):
     start_time = i * segment_duration
     end_time = (i + 1) * segment_duration
     
@@ -18,10 +18,10 @@ for i in range(10):
     cut_clip = clip.subclip(start_time, end_time)
     
     # Speed up the clip
-    speed_up_factor = 6  # 2x speed
+    speed_up_factor = 30  # 2x speed
     fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
-    fast_clip.write_videofile("Phase_2/progress/static/episode" + str(1)+"step"+str(i)+".mp4")
-
+    #fast_clip.write_videofile("Phase_2/progress/static/episode" + str(1)+"step"+str(i)+".mp4")
+    fast_clip.write_videofile("Phase_2/progress/static/demo.mp4")
 # # Load video
 # clip = VideoFileClip("webpage/static/marked_pouring.avi")
 # clip = clip.subclip(40, 640)

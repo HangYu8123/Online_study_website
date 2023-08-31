@@ -1,0 +1,97 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='video_format.css') }}"/>
+<style>
+  div.main{
+    max-width: 700px;
+    margin: 20px auto;
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 5px 30px 20px 30px;
+  }
+  div.error{
+    color: red;
+  }
+</style>
+<div class="main">
+  <div>
+    <h1> 
+    <span style="color:green;">  Pick up, pour, and spin</span>
+    
+    </h1>
+    <!-- <h2>Tufts University - Task Description and Controls</h2>
+      <h3>Virtual Agents learning from human interaction</h3> -->
+    <!-- <p>
+Below is a description of the task you will be asked to complete for this study:
+</p> -->
+<p>
+  <h4>What is the task?</h4>
+  The goal of the robot is to pour the sugar into the cup and spin the sugar in the cup using a spoon.
+
+</p>
+  
+
+<h4>What is your task?</h4>
+<!-- You will be teaching the robot by rating its performance as it attempts to press a button. A well-trained robot should be able to press the button quickly and reliably. -->
+You will watch several short videos of a robot performing the task. Your role is to indicate the overall task completion rate, ranging from 0 to 100.
+It's important to note that your rating should reflect the cumulative progress of the task, not for one single step.
+<h4>How to rate the robot?</h4>
+You will be rating the robot's performance based on the overall task completion on a scale of 0 to 100. 
+Here, <span style="color:blue;">0 means the robot has not started the task</span>, 
+and <span style="color:blue;">100 means the robot has completed the task perfectly</span>. 
+ For example, if the task was initially 30 complete and a video shows the robot bringing it to 80, 
+ <span style="color:blue;">you should rate it as 80 rather than 50</span>. 
+ This is similar to estimating the completion rate of a task you are familiar with, such as driving to school or cooking a meal.
+
+
+<h1>A demo of the robot performing the whole task</h1>
+<div class="Shared-Video-player">
+<video id="Shared-Video" width="640" height="480" controls autoplay ><source src={{ url_for('static', filename="demo.mp4") }} type="video/mp4"></video>
+</div>
+ <div>
+  <form action="/training" method="post">
+    0 totally unfinished
+    <br>
+    <label for="score">Progress (0-100):</label>
+    <input type="number" id="score" name="score" min="0" max="100" required>
+    <input type="submit" value="Submit Score">
+    <br>
+    100 task is perfectly done
+  </form>
+  </form>
+  <p>Try out the input box here. Each time you enter progress on this page, the page will reload.
+    During the experiment,
+    the progress will not display: the next step of robot motion to rate will play instead.</p>
+    <h2>Last progress Entered: {{progress}}</h2>
+</div>
+
+    </p>
+
+
+
+    <p>
+<h4>Duration</h4>
+The interaction will last for approximately 4 minutes, and consists several short videos in total.
+ After all the steps of the final episode, the feedback window will close and you will be prompted to complete the study.
+    </p>
+
+<form action="/continuetofeedback" method="post">
+  <input type="checkbox" id="info" name="info" value="true">
+  <label for="info">I have read the above and will act in good faith to complete the objectives described above.</label><br><br>
+  <input type="submit" value="Submit"></input>
+</form>
+<!-- {%if missing_data%}
+<div class="error">
+  Please confirm your consent and sign before submitting.
+</div>
+{% endif %} -->
+
+
+<!-- Required content -->
+<br>
+The Tufts computer science department is committed to making its digital environment accessible to all users, and welcomes comments or suggestions on access improvements.  Please send comments or suggestions on accessibility to the aabl_participants@cs.tufts.edu.
+<br>
+<a href="https://oeo.tufts.edu/policies-procedures/non-discrimination-statement/">Tufts non-discrimination statement</a><br>
+<a href="https://www.tufts.edu/about/privacy">Tufts privacy and terms of use statements</a>
+
+
+
+</div>
