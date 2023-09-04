@@ -2,11 +2,26 @@ from moviepy.editor import VideoFileClip, concatenate_videoclips
 from moviepy.video import fx
 
 # Load video
-clip = VideoFileClip("Phase_2/progress/static/perfect_demo.avi")
-clip = clip.subclip(30, 890).without_audio()
-# Determine clip duration and the duration of each segment
+clip = VideoFileClip("Phase_2/progress/static/mistake_in_pouring.avi")
+clip = clip.subclip(45, 955).without_audio()
+
 total_duration = clip.duration
 segment_duration = total_duration / 1
+
+
+# Cut the video into three parts: before, during and after the segment to cut out
+start_cut = 917 - 45  # time to start cut in seconds
+end_cut = 922 - 45  # time to end cut in seconds
+
+clip_before_cut = clip.subclip(0, start_cut)
+clip_to_cut = clip.subclip(start_cut, end_cut)  # This part will be removed
+clip = clip.subclip(end_cut, clip.duration)
+
+
+# Determine clip duration and the duration of each segment
+
+
+
 
 clips = []
 
