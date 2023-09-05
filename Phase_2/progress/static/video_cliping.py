@@ -10,12 +10,12 @@ segment_duration = total_duration / 1
 
 
 # Cut the video into three parts: before, during and after the segment to cut out
-start_cut = 917 - 45  # time to start cut in seconds
-end_cut = 922 - 45  # time to end cut in seconds
+# start_cut = 917 - 45  # time to start cut in seconds
+# end_cut = 922 - 45  # time to end cut in seconds
 
-clip_before_cut = clip.subclip(0, start_cut)
-clip_to_cut = clip.subclip(start_cut, end_cut)  # This part will be removed
-clip = clip.subclip(end_cut, clip.duration)
+# clip_before_cut = clip.subclip(0, start_cut)
+# clip_to_cut = clip.subclip(start_cut, end_cut)  # This part will be removed
+# clip = clip.subclip(end_cut, clip.duration)
 
 
 # Determine clip duration and the duration of each segment
