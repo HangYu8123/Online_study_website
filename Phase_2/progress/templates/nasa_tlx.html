@@ -14,7 +14,7 @@
   <div class="container">
     <h1>Survey</h1>
 
-    <h2><span style="color:green;"> 0 is very LOW, and 100 is very High </span> </h2>
+    <h2><span style="color:green;"> 0 is very LOW, and 100 is very HIGH </span> </h2>
 
     <form action="/submit_survey" method="post">
 
@@ -24,11 +24,11 @@
           <output id="challenges_value">50</output>
         </div><br>
 
-        <div class="tlx-question">
+        <!-- <div class="tlx-question">
           <label for="robot_improvement"><strong>In your estimation, to what extent will the robot's performance improve as a result of your teaching?</strong></label><br>
           <input type="range" id="robot_improvement" name="robot_improvement" min="0" max="100" value="50" step="5" oninput="robot_improvement_value.value = robot_improvement.value">
           <output id="robot_improvement_value">50</output>
-        </div><br>
+        </div><br> -->
 
         <div class="tlx-question">
           <label for="teaching_effectiveness"><strong>How effective do you believe the teaching signal was in conveying the necessary information to the robot?</strong></label><br>
@@ -37,14 +37,14 @@
         </div><br>
 
         <div class="tlx-question">
-          <label for="alternative_preference"><strong>Given your experience with the current option, to what extent are you interested in exploring an alternative that focuses on accommodating your preferences?</strong></label><br>
+          <label for="alternative_preference"><strong>Having experienced the current option, would you be interested in using an alternative teaching signal: preference? Preference will allow you to express your preferences at each individual step (i.e. one video clip).</strong></label><br>
           <input type="range" id="alternative_preference" name="alternative_preference" min="0" max="100" value="50" step="5" oninput="alternative_preference_value.value = alternative_preference.value">
           <output id="alternative_preference_value">50</output>
         </div><br>
 
 
         <div class="tlx-question">
-          <label for="effective_signal"><strong>Were there specific instances where the teaching signal effectively conveyed your understanding of the situation?</strong></label><br>
+          <label for="effective_signal"><strong>Were there instances where the teaching signal could easily describe your comprehension of situations? If so, could you describe these situations?</strong></label><br>
           <textarea id="effective_signal" name="effective_signal" style="width: 100%; height: 100px;"></textarea>
         </div><br>
 

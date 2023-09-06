@@ -5,7 +5,7 @@ from moviepy.editor import concatenate_videoclips
 # Input video name
 path = "Phase_2/progress/static/"
 #video_name = "recov_fixed_demo.avi"
-video_name = "recover.mp4"
+video_name = "perfect_demo.avi"
 # Read the video file
 clip = VideoFileClip(path + video_name)
 
@@ -26,4 +26,4 @@ clip = clip.fx(fx.all.speedx, 30)
 print("Output Video name:", "fx" + video_name)
 
 # Write the video file with explicit codec
-clip.write_videofile( path + "fx"+ video_name.split('.')[0] + '.mp4')
+clip.write_videofile( path + "demo.mp4")

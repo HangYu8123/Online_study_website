@@ -11,7 +11,7 @@ import os
 
 
 letters = string.ascii_letters
-eps_len_list = [1]
+eps_len_list = [1, 1, 1, 1, 1]
 app = Flask(__name__)
 # Setup the secret key and the environment
 app.config.update(SECRET_KEY='osd(99092=36&462134kjKDhuIS_d23',
@@ -75,94 +75,57 @@ def continuetofeedback():
     else:
         return render_template("excluded_participant.html")
 
-
-
-
-@app.route('/feedback', methods=['GET','POST'])
+@app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
-    thisvideo = "episode"+ str(session["episode"])+"step"+str(session["step"])+".mp4" # str(session["episode"])
+    thisvideo = "episode" + str(session["episode"]) + "step" + str(session["step"]) + ".mp4"
     if request.method == 'POST':
+        proceed_to_next_episode = request.form.get('proceed_to_next_episode')
+        if proceed_to_next_episode == 'true':
+            return render_template("episodesteptemplate.html", sessionID=session["sessionID"], thisvideo=thisvideo, episode=session["episode"], step=session["step"])
+        
         step = session["step"]
         feedbacknum = 999
         feedbacklist = session['feedbacklist']
-        #episode = session["episode"]
         episode = session["episode"]
         session['episodelength'] = eps_len_list[episode]
         episodelength = session['episodelength']
         episodemax = session['episodemax']
-        feedbacklist = session['feedbacklist']
         sessionID = session['sessionID']
-        print("session ID should be displaying," ,sessionID)
-        print("episode length is ", str(episodelength))
-        print("number of episodes is ", str(episodemax))
-        print("Current step is episode",str(episode),"step ",str(step))
         score = request.form.get('score')
-        
         if score is not None:
             feedbacknum = int(score)
-            print(f"feedback is {feedbacknum}")
-        # now we will process the feedback and progress to the next step of the episode
         if not feedbacknum == 999:
-            if step < episodelength: # we are not done with this episode
-                print('step',step,'complete, moving to next step')
-                print('step', step, "is less than", episodelength)
+            if step < episodelength:
                 step = step + 1
-                session['step']= step
+                session['step'] = step
                 feedbacklist.append(feedbacknum)
-                session["nextpage"] = "episode"+str(episode)+"step"+str(step)+".html"
-                return render_template("episodesteptemplate.html",sessionID=session["sessionID"], thisvideo=thisvideo, episode=session["episode"],step=session["step"] )
-            elif episode < episodemax: # episode complete, but there are more episodes
-                feedbacklist.append(feedbacknum) # add the last feedback to the list
+                return render_template("episodesteptemplate.html", sessionID=session["sessionID"], thisvideo=thisvideo, episode=session["episode"], step=session["step"])
+            elif episode < episodemax:
+                feedbacklist.append(feedbacknum)
                 module_dir = os.path.abspath(os.path.dirname(__file__))
-                file_path = os.path.join(module_dir, "progress", "progress_" + str(sessionID)+ ".csv")
-                # write all this episode's feedback to the file
-                # path  = os.getcwd()
-                #with open(path + f"/feedback_data/participant_feed_{sessionID}.csv", 'a', newline='') as csvfile:
+                file_path = os.path.join(module_dir, "progress", "progress_" + str(sessionID) + ".csv")
                 with open(file_path, 'a', newline='') as csvfile:
-                    csvwriter = csv.writer(csvfile, delimiter=' ',
-                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                    csvwriter = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
                     csvwriter.writerow(feedbacklist)
-                    csvfile.close()
-                print("Episode Complete, going to next episode")
                 session["step"] = 1
                 step = 1
                 episode = episode + 1
                 session['episode'] = episode
-                session["nextpage"] = "episode"+str(episode)+"step"+str(step)+".html"
-                session['feedbacklist'] =[] # reset for the next episode
-                return render_template("episodesteptemplate.html",sessionID=session["sessionID"], thisvideo=thisvideo, episode=session["episode"],step=session["step"] )
+                session['feedbacklist'] = []
+                return render_template("break.html")
             else:
-                feedbacklist.append(feedbacknum) # add the last feedback to the list
+                feedbacklist.append(feedbacknum)
                 module_dir = os.path.abspath(os.path.dirname(__file__))
-                file_path = os.path.join(module_dir, "progress", "progress_" + str(sessionID)+ ".csv")
-                # write all this episode's feedback to the file
-                # path  = os.getcwd()
-                #with open(path + f"/feedback_data/participant_feed_{sessionID}.csv", 'a', newline='') as csvfile:
+                file_path = os.path.join(module_dir, "progress", "progress_" + str(sessionID) + ".csv")
                 with open(file_path, 'a', newline='') as csvfile:
-                    csvwriter = csv.writer(csvfile, delimiter=' ',
-                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                    csvwriter = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
                     csvwriter.writerow(feedbacklist)
-                    csvfile.close()
-
-                print("Study complete, going to stopped page")
-                return render_template("nasa_tlx.html",sessionID=session["sessionID"])
-            print("Going to "+ session["nextpage"])
+                return render_template("nasa_tlx.html", sessionID=session["sessionID"])
         else:
-            print("not any of those conditions")
             return render_template("stopped.html")
-
     elif request.method == 'GET':
-        print("Page Reloaded")
-        return render_template("episodesteptemplate.html",sessionID=session["sessionID"], thisvideo=thisvideo, episode=session["episode"],step=session["step"] )
-        #return render_template("index.html")
+        return render_template("episodesteptemplate.html", sessionID=session["sessionID"], thisvideo=thisvideo, episode=session["episode"], step=session["step"])
 
-    # if session["episode"] < len(eps_len_list):
-    #     thisvideo = "episode"+ str(session["episode"])+"step"+str(session["step"])+".mp4" # str(session["episode"])
-    #     print(thisvideo)
-        
-    # else:
-    #     #return render_template("thankyou.html",sessionID=session["sessionID"])
-        
 def download_data(feedbacklist):
     #sample_data=[0, 1, 2]
     excel.init_excel(app)
@@ -181,7 +144,7 @@ import csv
 def submit_survey():
     # Retrieve data from form
     challenges = request.form.get('challenges')
-    robot_improvement = request.form.get('robot_improvement')
+    #robot_improvement = request.form.get('robot_improvement')
     teaching_effectiveness = request.form.get('teaching_effectiveness')
     alternative_preference = request.form.get('alternative_preference')
     confusion = request.form.get('confusion')
@@ -196,7 +159,7 @@ def submit_survey():
         with open(file_path, 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([challenges])
-            writer.writerow([robot_improvement])
+            #writer.writerow([robot_improvement])
             writer.writerow([teaching_effectiveness])
             writer.writerow([alternative_preference])
             writer.writerow([confusion])

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Break</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            text-align: center;
+            width: 100%;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 40px;  /* Added space between text and button */
+            text-align: center;  /* Center-aligned text */
+        }
+        form {
+            display: inline-block;
+        }
+        input[type="submit"] {
+            font-size: 24px;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Starting a new episode</h1>
+        <form action="/feedback" method="post">
+            <input type="hidden" name="proceed_to_next_episode" value="true">
+            <input type="submit" value="Next Episode">
+        </form>
+    </div>
+</body>
+</html>
