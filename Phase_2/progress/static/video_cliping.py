@@ -2,26 +2,26 @@ from moviepy.editor import VideoFileClip, concatenate_videoclips
 from moviepy.video import fx
 
 # Load video
-clip = VideoFileClip("Phase_2/progress/static/perfect_demo.avi")
-clip = clip.subclip(20, 14 * 60 + 55).without_audio()
+# clip = VideoFileClip("Phase_2/progress/static/perfect_demo.avi")
+# clip = clip.subclip(20, 14 * 60 + 55).without_audio()
 
-total_duration = clip.duration
-segment_duration = total_duration / 15
+# total_duration = clip.duration
+# segment_duration = total_duration / 15
 
 
-clips = []
+# clips = []
 
-for i in range(15):
-    start_time = i * segment_duration
-    end_time = (i + 1) * segment_duration
+# for i in range(15):
+#     start_time = i * segment_duration
+#     end_time = (i + 1) * segment_duration
     
-    # Cut video into a clip
-    cut_clip = clip.subclip(start_time, end_time)
+#     # Cut video into a clip
+#     cut_clip = clip.subclip(start_time, end_time)
     
-    # Speed up the clip
-    speed_up_factor = 6  # 2x speed
-    fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
-    fast_clip.write_videofile("Phase_2/progress/static/episode" + str(0)+"step"+str(i)+".mp4")
+#     # Speed up the clip
+#     speed_up_factor = 6  # 2x speed
+#     fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
+#     fast_clip.write_videofile("Phase_2/progress/static/episode" + str(0)+"step"+str(i)+".mp4")
 
 
 
@@ -30,16 +30,35 @@ for i in range(15):
 clip = VideoFileClip("Phase_2/progress/static/imperfect_demo.avi")
 clip = clip.subclip(20, 13 * 60 + 20).without_audio()
 
+
+#Cut the video into three parts: before, during and after the segment to cut out
+start_cut = 24   # time to start cut in seconds
+end_cut = 60  # time to end cut in seconds
+
+clip_before_cut = clip.subclip(0, start_cut)
+clip_to_cut = clip.subclip(start_cut, end_cut)  # This part will be removed
+clip_after_cut = clip.subclip(end_cut, clip.duration)
+clip = concatenate_videoclips([clip_before_cut, clip_after_cut])
+#Determine clip duration and the duration of each segment
+
 total_duration = clip.duration
 segment_duration = total_duration / 15
 
 
 clips = []
-
+time_now = 0
 for i in range(15):
-    start_time = i * segment_duration
-    end_time = (i + 1) * segment_duration
-    
+    if i <= 8:
+        segment_duration = 7.85 * 6
+        start_time = i * segment_duration
+        end_time = (i + 1) * segment_duration
+    if i > 8:
+        segment_duration = (total_duration - time_now) / (15 - i) 
+        start_time = time_now
+        end_time = time_now + segment_duration
+
+
+    time_now += segment_duration
     # Cut video into a clip
     cut_clip = clip.subclip(start_time, end_time)
     
@@ -52,83 +71,104 @@ for i in range(15):
 
 
 
-clip = VideoFileClip("Phase_2/progress/static/non_recover_demo.avi")
-clip = clip.subclip(0, 13 * 60 + 20).without_audio()
+# clip = VideoFileClip("Phase_2/progress/static/non_recover_demo.avi")
+# clip = clip.subclip(0, 13 * 60 + 20).without_audio()
 
-total_duration = clip.duration
-segment_duration = total_duration / 15
+# total_duration = clip.duration
+# segment_duration = total_duration / 15
 
 
-clips = []
+# clips = []
 
-for i in range(15):
-    start_time = i * segment_duration
-    end_time = (i + 1) * segment_duration
+# for i in range(15):
+#     start_time = i * segment_duration
+#     end_time = (i + 1) * segment_duration
     
-    # Cut video into a clip
-    cut_clip = clip.subclip(start_time, end_time)
+#     # Cut video into a clip
+#     cut_clip = clip.subclip(start_time, end_time)
     
-    # Speed up the clip
-    speed_up_factor = 6  # 2x speed
-    fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
-    fast_clip.write_videofile("Phase_2/progress/static/episode" + str(2)+"step"+str(i)+".mp4")
+#     # Speed up the clip
+#     speed_up_factor = 6  # 2x speed
+#     fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
+#     fast_clip.write_videofile("Phase_2/progress/static/episode" + str(2)+"step"+str(i)+".mp4")
 
 
-clip = VideoFileClip("Phase_2/progress/static/recover.mp4")
-clip = clip.subclip(0, 13 * 60 + 20).without_audio()
+# clip = VideoFileClip("Phase_2/progress/static/recover.mp4")
+# clip = clip.subclip(0, 13 * 60 + 20).without_audio()
 
-total_duration = clip.duration
-segment_duration = total_duration / 15
+# total_duration = clip.duration
+# segment_duration = total_duration / 16
 
-#Cut the video into three parts: before, during and after the segment to cut out
-start_cut = 11*60 + 4   # time to start cut in seconds
-end_cut = 11*60 + 24  # time to end cut in seconds
+# #Cut the video into three parts: before, during and after the segment to cut out
+# start_cut = 11*60 + 4   # time to start cut in seconds
+# end_cut = 11*60 + 24  # time to end cut in seconds
 
-clip_before_cut = clip.subclip(0, start_cut)
-clip_to_cut = clip.subclip(start_cut, end_cut)  # This part will be removed
-clip_after_cut = clip.subclip(end_cut, clip.duration)
-clip = concatenate_videoclips([clip_before_cut, clip_after_cut])
-#Determine clip duration and the duration of each segment
+# clip_before_cut = clip.subclip(0, start_cut)
+# clip_to_cut = clip.subclip(start_cut, end_cut)  # This part will be removed
+# clip_after_cut = clip.subclip(end_cut, clip.duration)
+# clip = concatenate_videoclips([clip_before_cut, clip_after_cut])
+# #Determine clip duration and the duration of each segment
 
-total_duration = clip.duration
-segment_duration = total_duration / 15
+# total_duration = clip.duration
+# segment_duration = total_duration / 16
+# print(total_duration)
 
-clips = []
+# clips = []
+# time_now = 0
+# for i in range(18):
+#     if i <= 9:
+#         segment_duration = 7.2 * 6
+#         start_time = i  * segment_duration
+#         end_time = (i + 1) * segment_duration
+#     if i == 10:
+#         segment_duration = 6 * 6
+#         start_time = 10 * 7.2 * 6 
+#         end_time = 10 * 7.2 * 6 + 6 * 6
+#     if i > 10:
+#         segment_duration = (total_duration - 10 * 7.2 * 6 - 6 * 6) / 6 
+#         start_time = 10 * 7.2 * 6 + 6 * 6 + (i - 11) * segment_duration
+#         end_time = 10 * 7.2 * 6 + 6 * 6 + (i - 10) * segment_duration
+#     if i > 13:
+#         segment_duration = (total_duration - time_now ) / (18 - i)  
+#         start_time = time_now
+#         end_time = time_now + segment_duration
 
-for i in range(15):
-    start_time = i * segment_duration
-    end_time = (i + 1) * segment_duration
+#     time_now += segment_duration
+#     # Cut video into a clip
+#     cut_clip = clip.subclip(start_time, end_time)
     
-    # Cut video into a clip
-    cut_clip = clip.subclip(start_time, end_time)
+#     # Speed up the clip
     
-    # Speed up the clip
-    speed_up_factor = 6  # 2x speed
-    fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
-    fast_clip.write_videofile("Phase_2/progress/static/episode" + str(3)+"step"+str(i)+".mp4")
-    #fast_clip.write_videofile("Phase_2/progress/static/demo.mp4")
+#     speed_up_factor = 6  # 2x speed
+#     if i == 10:
+#         speed_up_factor = 5
+#     if i > 13:
+#         speed_up_factor = 5
+#     fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
+#     fast_clip.write_videofile("Phase_2/progress/static/episode" + str(3)+"step"+str(i)+".mp4")
+#     #fast_clip.write_videofile("Phase_2/progress/static/demo.mp4")
 
 
 
-clip = VideoFileClip("Phase_2/progress/static/miss_cup_demo.avi")
-clip = clip.subclip(20, 14 * 60 + 55).without_audio()
+# clip = VideoFileClip("Phase_2/progress/static/miss_cup_demo.avi")
+# clip = clip.subclip(20, 14 * 60 + 55).without_audio()
 
-total_duration = clip.duration
-segment_duration = total_duration / 15
+# total_duration = clip.duration
+# segment_duration = total_duration / 15
 
 
-clips = []
+# clips = []
 
-for i in range(15):
-    start_time = i * segment_duration
-    end_time = (i + 1) * segment_duration
+# for i in range(15):
+#     start_time = i * segment_duration
+#     end_time = (i + 1) * segment_duration
     
-    # Cut video into a clip
-    cut_clip = clip.subclip(start_time, end_time)
+#     # Cut video into a clip
+#     cut_clip = clip.subclip(start_time, end_time)
     
-    # Speed up the clip
-    speed_up_factor = 6  # 2x speed
-    fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
-    fast_clip.write_videofile("Phase_2/progress/static/episode" + str(4)+"step"+str(i)+".mp4")
+#     # Speed up the clip
+#     speed_up_factor = 6  # 2x speed
+#     fast_clip = cut_clip.fx(fx.all.speedx, speed_up_factor)
+#     fast_clip.write_videofile("Phase_2/progress/static/episode" + str(4)+"step"+str(i)+".mp4")
 
 
